@@ -9,18 +9,26 @@ class Scoreboard(Turtle):
         self.hideturtle()
         self.speed("fastest")
         self.color("white")
-        self.goto(0, 270)
         self.score = 0
+        self.high_score = 0
         self.display()
+        self.play_again = True
 
     def display(self):
-        self.write(f"Score: {self.score}", move=False, align=ALIGNMENT, font=FONT)
+        self.clear()
+        self.goto(0,270)
+        self.write(f"Score: {self.score} High Score: {self.high_score}", move=False, align=ALIGNMENT, font=FONT)
 
     def increase_score(self):
-        self.clear()
         self.score += 1
         self.display()
 
-    def game_over(self):
-        self.goto(0, 0)
-        self.write(f"GAME OVER", move=False, align=ALIGNMENT, font=FONT)
+    def check_high_score(self):
+        if self.score > self.high_score:
+            self.high_score = self.score
+
+    def reset_game(self):
+        self.check_high_score()
+        self.score = 0
+        self.display()
+
